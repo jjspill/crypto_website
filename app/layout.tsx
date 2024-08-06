@@ -9,10 +9,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'OliDog Crypto Bot',
     type: 'website',
-    // url: 'https://traintimesnyc.com',
+    url: 'https://crypto-website-liard.vercel.app/',
     // siteName: 'Train Times NYC',
     description: 'IYKYK',
   },
+  metadataBase: new URL('https://crypto-website-liard.vercel.app/'),
 };
 
 export default function RootLayout({
