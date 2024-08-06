@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <div className="flex justify-center min-h-screen bg-black">
-      <div className="text-center w-[50%]">
+      <div className="text-center w-[90%] md:w-[50%]">
         <h1 className="text-4xl text-white pt-20">OilDog Crypto Bot</h1>
         {data.length === 0 && <p className="text-white">Loading...</p>}
         {data.length > 0 && (
@@ -44,13 +44,14 @@ export default function Home() {
             >
               Download CSV
             </button>
-            <div className="bg-gray-800 p-1 mb-10 rounded-lg min-h-[400px] ">
+            <div className="bg-gray-800 p-1 mb-10 rounded-lg min-h-[400px]">
               {/* <pre className="text-white">{JSON.stringify(data, null, 2)}</pre> */}
-              <div className="text-left min-w-full">
+              <div className="text-left min-w-full overflow-x-auto md:overflow-hidden">
                 <JSONTree
                   data={data}
                   theme={myCustomTheme}
                   invertTheme={false}
+                  hideRoot={true}
                 />
               </div>
             </div>
@@ -69,13 +70,13 @@ const myCustomTheme = {
   base02: '#49483e',
   base03: '#75715e',
   base04: '#a59f85',
-  base05: '#f8f8f2', // default text color
+  base05: '#4ade80', // default text color
   base06: '#f5f4f1',
   base07: '#f9f8f5',
-  base08: '#f92672', // key colors
+  base08: '#4ade80', // key colors
   base09: '#fd971f',
   base0A: '#f4bf75',
-  base0B: '#a6e22e', // string color
+  base0B: '#4ade80', // string color
   base0C: '#a1efe4',
   base0D: '#66d9ef', // number color
   base0E: '#ae81ff',
