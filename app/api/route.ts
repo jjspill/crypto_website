@@ -15,7 +15,8 @@ if (!dbName) {
   );
 }
 
-export async function GET(request: Request): Promise<Response> {
+const dynamic = 'force-dynamic';
+export async function GET(): Promise<Response> {
   console.log('GET /api');
   const { client, db } = await connectToDatabase(uri, dbName);
   const data = await db.collection('Data').find().toArray();
