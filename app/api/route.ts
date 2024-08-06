@@ -41,8 +41,9 @@ export async function GET(): Promise<Response> {
 
 function formatTimestampForExcelEastern(timestamp: number): string {
   const date = new Date(timestamp);
+
   const options: Intl.DateTimeFormatOptions = {
-    timeZone: 'America/New_York', // Eastern Time zone
+    timeZone: 'America/New_York',
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -50,11 +51,9 @@ function formatTimestampForExcelEastern(timestamp: number): string {
     minute: '2-digit',
     second: '2-digit',
     hour12: false,
+    timeZoneName: 'short',
   };
 
-  const formattedDate = date.toLocaleString('en-US', options);
-  return formattedDate.replace(
-    /(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/,
-    '$3-$1-$2 $4:$5:$6',
-  );
+  const dateString = new Intl.DateTimeFormat('en-US', options).format(date);
+  return dateString;
 }
