@@ -11,7 +11,8 @@ interface DataItem {
 }
 
 export default function Home() {
-  const [data, setData] = useState<DataItem[]>([]);
+  const [data, setData] = useState<any[]>([]);
+  const [updated, setUpdated] = useState<string>('');
 
   useEffect(() => {
     fetch('/api', {
@@ -20,7 +21,10 @@ export default function Home() {
       },
     })
       .then((response) => response.json())
-      .then((data: DataItem[]) => setData(data));
+      .then((data: any) => {
+        setData(data.data);
+        setUpdated(data.updated);
+      });
   }, []);
 
   const downloadCSV = () => {
@@ -43,6 +47,11 @@ export default function Home() {
       <div className="text-center w-[90%] md:w-[50%]">
         <h1 className="text-4xl text-white pt-20">OilDog Crypto Bot</h1>
         {data.length === 0 && <p className="text-white">Loading...</p>}
+        {data.length > 0 && (
+          <p className="text-white">
+            Updated: {new Date(updated).toLocaleString()}
+          </p>
+        )}
         {data.length > 0 && (
           <>
             <button

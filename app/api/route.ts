@@ -28,7 +28,11 @@ export async function GET(): Promise<Response> {
       }
     });
   });
-  return new Response(JSON.stringify(data), {
+  const response = {
+    data: data,
+    updated: new Date().toISOString(),
+  };
+  return new Response(JSON.stringify(response), {
     // return new Response(JSON.stringify([]), {
     headers: {
       'Content-Type': 'application/json',
