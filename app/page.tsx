@@ -14,7 +14,11 @@ export default function Home() {
   const [data, setData] = useState<DataItem[]>([]);
 
   useEffect(() => {
-    fetch('/api')
+    fetch('/api', {
+      next: {
+        revalidate: 60, // revalidate every 60 seconds
+      },
+    })
       .then((response) => response.json())
       .then((data: DataItem[]) => setData(data));
   }, []);
