@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'OilDog Crypto Bot',
   openGraph: {
-    title: 'OliDog Crypto Bot',
+    title: 'OilDog Crypto Bot',
     type: 'website',
     url: 'https://crypto-website-liard.vercel.app/',
     // siteName: 'Train Times NYC',
