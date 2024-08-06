@@ -15,11 +15,7 @@ export default function Home() {
   const [updated, setUpdated] = useState<string>('');
 
   useEffect(() => {
-    fetch('/api', {
-      next: {
-        revalidate: 60, // revalidate every 60 seconds
-      },
-    })
+    fetch('/api', {})
       .then((response) => response.json())
       .then((data: any) => {
         setData(data.data);

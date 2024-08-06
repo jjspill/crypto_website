@@ -17,7 +17,6 @@ if (!dbName) {
 
 export const dynamic = 'force-dynamic';
 export async function GET(): Promise<Response> {
-  console.log('GET /api');
   const { client, db } = await connectToDatabase(uri, dbName);
   const data = await db.collection('Data').find().toArray();
   data.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
