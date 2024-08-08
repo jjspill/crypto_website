@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { unparse } from 'papaparse';
 import { JSONTree } from 'react-json-tree';
 import styles from './website.module.css';
+import { accData } from './utils/chart';
+import { useData } from './hooks/useData';
+import { GraphDisplay } from './components/chart';
 
 interface DataItem {
   _id: string;
@@ -11,17 +14,7 @@ interface DataItem {
 }
 
 export default function Home() {
-  const [data, setData] = useState<any[]>([]);
-  const [updated, setUpdated] = useState<string>('');
-
-  useEffect(() => {
-    fetch('/api', {})
-      .then((response) => response.json())
-      .then((data: any) => {
-        setData(data.data);
-        setUpdated(data.updated);
-      });
-  }, []);
+  const { data, graphData, updated } = useData();
 
   const downloadCSV = () => {
     const csv = unparse(data);
@@ -49,26 +42,29 @@ export default function Home() {
           </p>
         )}
         {data.length > 0 && (
-          <>
-            <button
-              className={`${styles.creepInBg} border-2 border-green-400 text-white p-2 m-10 rounded-lg`}
-              onClick={downloadCSV}
-              type="button"
-            >
-              Download CSV
-            </button>
-            <div className="bg-gray-800 p-1 mb-10 rounded-lg min-h-[400px]">
-              {/* <pre className="text-white">{JSON.stringify(data, null, 2)}</pre> */}
-              <div className="text-left min-w-full overflow-x-auto md:overflow-hidden">
-                <JSONTree
-                  data={data}
-                  theme={myCustomTheme}
-                  invertTheme={false}
-                  hideRoot={true}
-                />
-              </div>
+          <button
+            className={`${styles.creepInBg} border-2 border-green-400 text-white p-2 m-10 mt-5 rounded-lg`}
+            onClick={downloadCSV}
+            type="button"
+          >
+            Download CSV
+          </button>
+        )}
+        {Object.keys(graphData || {}).length > 0 && (
+          <GraphDisplay graphData={graphData} />
+        )}
+        {data.length > 0 && (
+          <div className="bg-gray-800 p-1 mb-10 rounded-lg min-h-[400px]">
+            {/* <pre className="text-white">{JSON.stringify(data, null, 2)}</pre> */}
+            <div className="text-left min-w-full overflow-x-auto md:overflow-hidden">
+              <JSONTree
+                data={data}
+                theme={myCustomTheme}
+                invertTheme={false}
+                hideRoot={true}
+              />
             </div>
-          </>
+          </div>
         )}
       </div>
     </div>
